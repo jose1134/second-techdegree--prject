@@ -1,9 +1,10 @@
-const studentlist = $('.student-list');
-const pageClass = $('.page');  
+const studentlist = $('.student-list'); 
 const studentItems = $('.student-item');
 let studentsForEachPage = 10;
 let studentsPerPage = Math.ceil(studentItems.length /studentsForEachPage);
+let pageLinkClass = $(".pagination");
 let studentGroup = [];
+
 
 function hidestudents(){ 
 	studentItems.hide();
@@ -14,8 +15,20 @@ function Elements(){
 	pagediv.className = 'pagination';
 	pagediv.appendChild(document.createElement('ul'))
 	const paginationPlace = $(".page").append(pagediv);
+	const searchDiv = document.createElement('div');
+	const searchButton = document.createElement('button');
+	const searchInput = document.createElement('input');
+	const searchArea = $('.page-header').append(searchDiv);
+	searchDiv.className = 'student-search';
+	searchDiv.appendChild(searchInput);
+	searchDiv.appendChild(searchButton);
+	searchInput.placeholder = 'Search for Students...'
+	searchButton.innerHTML = 'Search'
+	
+	const noResultDiv = document.createElement('div');
 }
-let pageLinkClass = $(".pagination");
+
+
 
 function pagelinks(studentsPerPage){
 	let pageButtonsPlace = document.querySelector('.pagination ul');
@@ -41,14 +54,31 @@ function displayStudents(page, studentsToDisplay) {
 		if (i >= firstStudent && i <= lastStudent){
 			studentGroup[i].style.display = 'block';
 		} else {
-			studentGroup[i].style.display = "none";
+			studentGroup[i].style.display = 'none';
 		}
 	}
 }
 
 
 
-// hidestudents();
+hidestudents();
 Elements();
-pagelinks(studentsPerPage);
+pagelinks(studentsPerPage)
 displayStudents(1, studentItems);
+
+
+$('.pagination').click(function(e){
+	const target = e.target;
+	const buttons = document.querySelectorAll('.pagination ul li a');
+	if (target.tagName === 'A'){
+		for (let i = 0; i < buttons.length; i++){
+			if (buttons[i].innerText != target.innerText ){
+				buttons[i].className = '';
+		 	} else {
+				target.className = 'active';
+			}
+		}
+	displayStudents(parseInt(target.innerText), studentItems);
+	}
+});
+

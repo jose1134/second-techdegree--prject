@@ -37,7 +37,7 @@ function displayStudents(page, studentsToDisplay) {
 	let firstStudent = (page * studentsForEachPage) - 10;
 	let lastStudent = (page * studentsForEachPage) - 1;
 	studentGroup = studentsToDisplay;
-	for (let i = 0 ; i <= studentItems.length ; i++ ){
+	for (let i = 0 ; i < studentItems.length ; i++ ){
 		if (i >= firstStudent && i <= lastStudent){
 			studentGroup[i].style.display = 'block';
 		} else {

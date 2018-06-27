@@ -1,12 +1,12 @@
 const studentlist = $('.student-list');
 const pageClass = $('.page');  
-const studentItems = document.querySelectorAll('.student-item');
+const studentItems = $('.student-item');
 let studentsForEachPage = 10;
 let studentsPerPage = Math.ceil(studentItems.length /studentsForEachPage);
 let studentGroup = [];
 
 function hidestudents(){ 
-	studentlist.hide();
+	studentItems.hide();
 }
 
 function Elements(){
@@ -38,8 +38,8 @@ function displayStudents(page, studentsToDisplay) {
 	let lastStudent = (page * studentsForEachPage) - 1;
 	studentGroup = studentsToDisplay;
 	for (let i = 0 ; i <= studentItems.length ; i++ ){
-		if (i <= firstStudent && i <= lastStudent){
-			studentGroup[i].style.display = 'run-in';
+		if (i >= firstStudent && i <= lastStudent){
+			studentGroup[i].style.display = 'block';
 		} else {
 			studentGroup[i].style.display = "none";
 		}
@@ -51,4 +51,4 @@ function displayStudents(page, studentsToDisplay) {
 // hidestudents();
 Elements();
 pagelinks(studentsPerPage);
-displayStudents(1, studentlist);
+displayStudents(1, studentItems);
